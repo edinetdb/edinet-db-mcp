@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "edinetdb": {
+      "url": "https://edinetdb.jp/mcp",
+      "transport": "streamable-http"
+    }
+  }
+}
