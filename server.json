@@ -1,7 +1,7 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.edinetdb/edinet-db-mcp",
-  "description": "Remote MCP server for Japan's EDINET DB — structured financial data, HR/diversity disclosures, policy shareholdings, supply chain, corporate history, and director profiles for ~3,800 Japanese listed companies. OAuth + multi-tenant SaaS, used by 5,000+ authenticated users.",
+  "description": "Remote MCP for Japan's EDINET DB — 3,800 listed companies' financials & filings (OAuth)",
   "version": "1.0.0",
   "repository": {
     "url": "https://github.com/edinetdb/edinet-db-mcp",
