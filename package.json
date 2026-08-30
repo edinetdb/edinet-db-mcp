@@ -10,7 +10,7 @@
   "engines": { "node": ">=20" },
   "scripts": { "start": "node ./server.js" },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0"
+    "@modelcontextprotocol/sdk": "1.30.0"
   },
   "repository": { "type": "git", "url": "git+https://github.com/edinetdb/edinet-db-mcp.git" },
   "homepage": "https://edinetdb.jp"
