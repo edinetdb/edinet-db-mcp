@@ -87,11 +87,18 @@ Claude Desktop / Cursor / any stdio client:
 }
 ```
 
-From source, or with Docker:
+From source:
 
 ```bash
 git clone https://github.com/edinetdb/edinet-db-mcp && cd edinet-db-mcp
-npm install && EDINETDB_API_KEY=your-key node server.js
+npm ci && EDINETDB_API_KEY=your-key node server.js
+```
+
+With Docker (`-i` is required — the transport is stdio):
+
+```bash
+docker build -t edinet-db-mcp .
+docker run -i --rm -e EDINETDB_API_KEY=your-key edinet-db-mcp
 ```
 
 | Environment variable | Required | Default | Purpose |
