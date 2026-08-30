@@ -14,7 +14,21 @@
 
 EDINET DB exposes structured financial and corporate data extracted from Japan's regulatory filings (EDINET, by the Financial Services Agency) plus public open data (gBizINFO from METI, National Tax Agency corporate registry, Wikidata). Connect from Claude Desktop, Claude Code, Cursor, Codex CLI, or any MCP-compatible client to query company financials, HR/diversity disclosures, supply chains, patents, executive profiles, and corporate history via natural language.
 
-## Quick start
+## Two ways to connect
+
+| | Remote (recommended) | Local stdio server (this repo) |
+|---|---|---|
+| Endpoint | `https://edinetdb.jp/mcp` | runs on your machine |
+| Tools | 75 | 13 core tools |
+| Auth | OAuth 2.0 or API key | API key (`EDINETDB_API_KEY`) |
+| Setup | add one URL | `npx`, `node`, or Docker |
+
+The remote server is the full product and needs nothing installed. The local
+server in this repository is a small, dependency-light stdio client over the
+same public REST API, for clients that cannot speak streamable HTTP or for
+users who would rather run the process themselves.
+
+## Quick start — remote
 
 ### Claude Desktop (Custom Connector)
 
@@ -51,7 +65,68 @@ claude mcp add edinetdb https://edinetdb.jp/mcp --transport http
 codex mcp add edinetdb https://edinetdb.jp/mcp
 ```
 
-## Tools (75)
+## Quick start — local stdio server
+
+Get a free API key at https://edinetdb.jp/developers, then:
+
+```bash
+EDINETDB_API_KEY=your-key npx -y github:edinetdb/edinet-db-mcp
+```
+
+Claude Desktop / Cursor / any stdio client:
+
+```json
+{
+  "mcpServers": {
+    "edinetdb": {
+      "command": "npx",
+      "args": ["-y", "github:edinetdb/edinet-db-mcp"],
+      "env": { "EDINETDB_API_KEY": "your-key" }
+    }
+  }
+}
+```
+
+From source, or with Docker:
+
+```bash
+git clone https://github.com/edinetdb/edinet-db-mcp && cd edinet-db-mcp
+npm install && EDINETDB_API_KEY=your-key node server.js
+```
+
+| Environment variable | Required | Default | Purpose |
+|---|---|---|---|
+| `EDINETDB_API_KEY` | yes, to call tools | — | Your EDINET DB API key. Listing tools works without it. |
+| `EDINETDB_BASE_URL` | no | `https://edinetdb.jp/v1` | REST API base URL. |
+| `EDINETDB_TIMEOUT_MS` | no | `30000` | Per-request timeout in milliseconds. |
+
+### Tools in the local server (13)
+
+Each tool is a typed wrapper over one REST endpoint. The set is deliberately
+narrow: one tool per question a user actually asks, with no two tools covering
+the same ground.
+
+| Tool | What it answers |
+|---|---|
+| `search_companies` | Resolve a name or securities code to an EDINET code |
+| `get_company` | Full profile of one company |
+| `get_financials` | Multi-year financial statement series |
+| `get_segments` | Which business segment earns the money |
+| `get_earnings` | Latest quarterly results and company forecast |
+| `get_disclosures` | What the company filed, and when |
+| `get_text_blocks` | Business overview, risk factors, MD&A as filed |
+| `get_directors` | Board roster, tenure and shareholding |
+| `get_shareholders` | Who holds 5%+ of this company |
+| `search_shareholders` | Everything one investor holds |
+| `screen_companies` | Filter the market by numeric criteria |
+| `get_ranking` | Market-wide league table for one metric |
+| `compare_peers` | Benchmark a company against its industry |
+
+For the full surface — IR documents, knowledge-graph strategies, KPI tracking,
+watchlists, dashboards and saved analyses — use the remote server, which
+exposes all 75 tools listed below.
+
+## Tools in the remote server (75)
 
 **Company & financials**
 - `get_company` — Company profile + latest financials (XBRL-sourced, no LLM)
@@ -160,7 +235,7 @@ Details: https://edinetdb.jp/pricing
 
 ## Position vs. similar projects
 
-EDINET DB is the production-grade, OAuth-authenticated, multi-tenant SaaS remote MCP for Japanese financial filings. Other Japan-specific MCP servers (e.g., bug-tracker for individual contributors) are local stdio implementations requiring users to obtain their own API keys and run a local process. The 9,000+ registered user base reflects production usage since 2026-03-01.
+EDINET DB runs as a hosted, OAuth-authenticated, multi-tenant remote MCP server, and also ships the local stdio client in this repository for people who would rather run the process themselves. It has been in production since 2026-03-01 and has 9,000+ registered users.
 
 ## Languages
 
