@@ -1,0 +1,17 @@
+{
+  "name": "edinet-db-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for EDINET DB — structured financial data for Japanese listed companies",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "edinet-db-mcp": "./server.js" },
+  "main": "./server.js",
+  "files": ["server.js"],
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node ./server.js" },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0"
+  },
+  "repository": { "type": "git", "url": "git+https://github.com/edinetdb/edinet-db-mcp.git" },
+  "homepage": "https://edinetdb.jp"
+}
