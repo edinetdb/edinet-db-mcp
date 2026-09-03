@@ -234,8 +234,8 @@ We do not redistribute exchange-licensed data (real-time stock prices, TDnet). S
 |---|---|---|
 | Free | ¥0 | 100 |
 | Pro | ¥4,980 | 1,000 |
-| Business | ¥29,800 | 10,000 |
-| Enterprise | Contact | Custom |
+| Developer (formerly Business, renamed 2026-09-03) | ¥29,800 | 10,000 |
+| Business (organizations) / Enterprise | Contact | Custom |
 | Academy | Free for accredited researchers | Custom |
 
 Details: https://edinetdb.jp/pricing
